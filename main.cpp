@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h> 
+#include <math.h>
+
+int convertBinaryToDecimal(long long b);
+int main() 
+{
+	char type;
+	int number;
+	for (;;)
+	{
+		printf ("Please select input type(decimal:d, binary:b, hexadecimal:h):");
+		scanf ("%c",&type);
+		if (type==100)
+		{
+			printf ("Please enter a number(decimal):");
+			scanf ("%d",&number);
+			char s[10];
+			itoa(number, s, 2);
+			printf ("the binary of %d is %s;\n",number,s);
+			printf ("the octal of %d is %o;\n",number,number);
+			printf ("the hexadecimal of %d is %x.\n",number,number);
+			break;
+		}
+		else if (type==98)
+		{
+			long long b;
+			printf ("Please enter a number(binary):");
+			scanf ("%lld",&b);
+			printf ("the decimal of %lld is %d;\n",b,convertBinaryToDecimal(b));
+			printf ("the octal of %lld is %o;\n",b,convertBinaryToDecimal(b));
+			printf ("the hexadecimal of %lld is %x.\n",b,convertBinaryToDecimal(b));
+			break;
+		}
+		else if (type==104)
+		{
+			printf ("Please enter a number(hexadecimal):");
+			scanf ("%x",&number);
+			char s[10];
+			itoa(number, s, 2);
+			printf ("the binary of %x is %s;\n",number,s);
+			printf ("the octal of %x is %d;\n",number,number);
+			printf ("the hexadecimal of %x is %o.\n",number,number);
+			break;
+		}
+		else
+		printf ("Input error, please try again.\n");
+	}
+	
+	system ("pause");
+	return 0;
+}
+
+int convertBinaryToDecimal(long long b)
+{
+    int decimalNumber = 0, i = 0, remainder;
+    while (b!=0)
+    {
+        remainder = b%10;
+        b /= 10;
+        decimalNumber += remainder*pow(2,i);
+        ++i;
+    }
+    return decimalNumber;
+}
